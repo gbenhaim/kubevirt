@@ -7,7 +7,7 @@ image="os-3.10.0@sha256:50a4b8ee3e07d592e7e4fbf3eb1401980a5947499dfdc3d847c085b5
 source cluster/ephemeral-provider-common.sh
 
 function up() {
-    ${_cli} run --reverse $(_add_common_params)
+    ${_cli} run --reverse $(_add_common_params) $(get_network)
     ${_cli} ssh --prefix $provider_prefix node01 -- sudo cp /etc/origin/master/admin.kubeconfig ~vagrant/
     ${_cli} ssh --prefix $provider_prefix node01 -- sudo chown vagrant:vagrant ~vagrant/admin.kubeconfig
 

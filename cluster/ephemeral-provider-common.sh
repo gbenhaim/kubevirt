@@ -2,7 +2,15 @@
 
 set -e
 
-_cli="docker run --privileged --net=host --rm ${USE_TTY} -v /var/run/docker.sock:/var/run/docker.sock kubevirtci/gocli@sha256:aa7f295a7908fa333ab5e98ef3af0bfafbabfd3cee2b83f9af47f722e3000f6a"
+_cli="docker run --privileged --net=host --rm ${USE_TTY} -v /var/run/docker.sock:/var/run/docker.sock docker.io/galbh2/kubevirtci:v1"
+
+function get_network() {
+    [[ "$STDCI_SLAVE_CONTAINER_NAME" ]] \
+    && echo "--network container:${STDCI_SLAVE_CONTAINER_NAME}" \
+    && return
+
+    echo "--network bridge"
+}
 
 function _main_ip() {
     echo 127.0.0.1
