@@ -1,0 +1,3 @@
+- name: STDCI_SLAVE_CONTAINER_NAME
+  valueFrom:
+    runtimeEnv: STDCI_SLAVE_CONTAINER_NAME
