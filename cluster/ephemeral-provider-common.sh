@@ -2,7 +2,7 @@
 
 set -e
 
-_cli="docker run --privileged --net=host --rm ${USE_TTY} -v /var/run/docker.sock:/var/run/docker.sock docker.io/galbh2/kubevirtci:v1"
+_cli="docker run --privileged --net=host --rm ${USE_TTY} -v /var/run/docker.sock:/var/run/docker.sock docker.io/galbh2/kubevirtci:v2"
 
 function get_network() {
     [[ "$STDCI_SLAVE_CONTAINER_NAME" ]] \
