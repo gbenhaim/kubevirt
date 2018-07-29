@@ -33,7 +33,7 @@ EOF
 }
 
 function _registry_volume() {
-    echo ${job_prefix}_registry
+    echo "${job_prefix}_${provider_prefix}_registry"
 }
 
 function _add_common_params() {
