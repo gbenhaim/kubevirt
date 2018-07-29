@@ -6,10 +6,10 @@ _cli="docker run --privileged --net=host --rm ${USE_TTY} -v /var/run/docker.sock
 
 function get_network() {
     [[ "$STDCI_SLAVE_CONTAINER_NAME" ]] \
-    && echo "--network container:${STDCI_SLAVE_CONTAINER_NAME}" \
+    && echo "--network container:${STDCI_SLAVE_CONTAINER_NAME} --random-ports=false" \
     && return
 
-    echo "--network bridge"
+    echo "--network bridge --random-ports"
 }
 
 function _main_ip() {
@@ -37,7 +37,7 @@ function _registry_volume() {
 }
 
 function _add_common_params() {
-    local params="--nodes ${KUBEVIRT_NUM_NODES} --random-ports --background --prefix $provider_prefix --registry-volume $(_registry_volume) kubevirtci/${image} ${KUBEVIRT_PROVIDER_EXTRA_ARGS}"
+    local params="--nodes ${KUBEVIRT_NUM_NODES} --background --prefix $provider_prefix --registry-volume $(_registry_volume) kubevirtci/${image} ${KUBEVIRT_PROVIDER_EXTRA_ARGS}"
     if [[ -d $NFS_WINDOWS_DIR ]] && [[ $TARGET =~ windows.* ]]; then
         params="--memory 8192M --nfs-data $NFS_WINDOWS_DIR $params"
     fi
